@@ -36,3 +36,13 @@ library(ggplot2)
 
 # - Para cada teste haverá uma descrição explicando o teste, sua aplicação e a hipótese nula (H0) associada.
 #   Os testes serão executados com dados gerados dentro do próprio Dashboard de automação.
+
+
+
+
+
+
+
+# - Se os dados se aproximam de uma distribuição normal e as suposições paramétricas são atendidas, os TESTES PARAMÉTRICOS são preferíveis devido
+#   à sua eficiência estatística. No entanto, se as suposições paramétricas são violadas ou os dados não têm uma distribuição normal, os testes 
+#   NÃO PARAMÉTRICOS são uma opção mais apropriada, pois são mais robustos nessas situações.

@@ -8,14 +8,12 @@ getwd()
 ######################       Projeto Dashboard com Shiny para Automacao de Testes Estatísticos       ###################### 
 
 
-### SCRIPT
-
-
-# Instale cada um dos pacotes abaixo executando os comandos no console do RStudio.
+# Instalando as bibliotecas
 
 install.packages(c("shiny", "shinyjs", "shinyvalidate", "shinycssloaders", "tidyverse", "broom", "bslib", "thematic", "DT", "plotly"))
 
-# Imports
+
+# Importando as bibliotecas
 
 library(shiny)            # biblioteca para criar aplicativos web interativos em R. Ele permite criar painéis de controle, dashboards e aplicativos web interativos usando R como linguagem de programação.
 library(shinyjs)          # é uma extensão para o Shiny que fornece funcionalidades adicionais para melhorar a interatividade e a aparência dos aplicativos Shiny.
@@ -28,5 +26,18 @@ library(thematic)         # é outra biblioteca para personalização de temas e
 library(DT)               # é uma biblioteca para criar tabelas interativas em aplicativos Shiny.
 library(plotly)           # é uma biblioteca para criar gráficos interativos em R.
 options(warn = -1)        # suprimir mensagens de aviso durante a execução do código. 
+
+
+
+# OBJETIVO
+
+# - Vamos contruir uma aplicação (dashboard) para automatizar o processo de construção de testes estatísticos onde teremos uma aplicação totalmente
+#   gráfica onde poderemos imputar os dados ou fazer a leitura de um arquivo e a partir daí escolher o teste estatístico (não será a aplicação que
+#   que irá escolher), clicar em um botão e então obter todo o resultado (incluindo o gráfico).
+
+# - Utilizaremos o shiny (pacote da linguagem R para construção de Dashboard) e dentro deste dashboard faremos a automação de 5 testes estatísticos.
+
+# - Utilizaremos testes paramétricos e não paramétricos.
+
 
 

@@ -40,4 +40,61 @@ options(warn = -1)        # suprimir mensagens de aviso durante a execução do 
 # - Utilizaremos testes paramétricos e não paramétricos.
 
 
+# Carrega o arquivo com a descrição dos testes
+dados_desc_te <- read.csv("desc_testes_estatisticos.csv")
+View(dados_desc_te)
+
+
+
+##### SOBRE OS TESTES QUE SERÃO EXECUTADOS NO DASHBOARD
+
+## Executando o Teste t Para Uma Amostra
+
+# - Durante a execução do projeto ao selecionar o teste T para Uma Amostra e gerar dados randômicos, eles já seguem uma distribuição normal 
+#   automaticamente e portanto não precisamos realizar as validações necessárias.
+#   (os dados seguem uma distribuição normal por conta da funcao rnorm() que é utilizada no código).
+
+# - Entretanto ao usar dados externos, teremos que fazer antes as validações para as suposições.
+#   (Isso é necessário pois o teste t é teste paramétrico, e todo teste paramétrico possui suposições, e aí podemos considerar as
+#    suposições como verdadeiras e assumir o total risco ou valida.)
+
+
+## Executando o Teste t Para Duas Amostras
+
+# - Comparar duas amostras.
+# - Precisa validar as suposições pois é um teste paramétrico.
+
+
+## Executando o Teste de Wilcoxon Signed Rank
+
+# - É um teste não paramétrico.
+
+# - Caso os dados não sigam uma distribuição normal, precisaremos usar um teste não paramétrico ao invés do Teste t.
+# - Para quase todo teste paramétrico, existe um equivalente não paramétrico, cujo objetivo é fazer a validação necessária sem suposição de
+#   distribuição de dados.
+
+# - Portanto ao não conseguir validar as suposições ou validar e perceber que não segue uma distribuição normal, usa-se o este Teste no lugar do
+#   Teste t.
+
+
+## Executando o Teste de Shapiro-Wilk
+
+# - É um teste não paramétrico, portanto não necessita de suposições.
+
+# - É um teste de normalidade, é um teste para verificar se os dados de uma variável seguem uma distribuição normal. Vários modelos de aprendizado
+#   de máquina tem como suposição que as variáveis seguem uma distribuição normal.
+
+
+## Executando o Teste de Kolmogorov-Smirnov
+
+# - Teste estatístico não paramétrico que é usado para determinar se uma amostra segue uma distribuição de probabilidade específica ou se duas 
+#   amostras são provenientes da mesma distribuição de probabilidade. Ele é amplamente utilizado para verificar a normalidade dos dados ou para 
+#   comparar duas amostras independentes.
+
+
+
+
+
+
+
 

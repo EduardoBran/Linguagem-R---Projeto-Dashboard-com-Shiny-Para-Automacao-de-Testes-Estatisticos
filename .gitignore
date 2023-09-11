@@ -1,7 +1,6 @@
 *.db
 *.json
 *.sqlite
-*.csv
 *.Rhistory
 *.RData
 *.dta

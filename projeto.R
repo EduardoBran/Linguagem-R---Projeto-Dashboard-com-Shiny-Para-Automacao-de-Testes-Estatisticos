@@ -132,6 +132,7 @@ ui <- navbarPage(
   
   tabPanel(
     title = "Home",
+    
     sidebarLayout(
       
       # Painel lateral
@@ -151,10 +152,12 @@ ui <- navbarPage(
               ),
               selected = "Teste t Para Uma Amostra"
             ),
+            
             textInput(
               inputId = "primeira_amostra",
               label = "Digite uma lista de valores numéricos (separados por vírgula) ou use o botão para gerar dados randômicos:"
             ),
+            
             uiOutput("vector"),
             h5(
               actionButton(
@@ -163,7 +166,9 @@ ui <- navbarPage(
               ),
               align = "center"
             ),
+            
             uiOutput("samplemean"),
+            
             uiOutput("confidencelevel"),
             h5(
               actionButton(
@@ -199,6 +204,7 @@ ui <- navbarPage(
             )
             
           ) # mainPanel
+          
   
     ) # sidebarLayout
   
@@ -210,9 +216,52 @@ ui <- navbarPage(
 
 
 
+#### EXPLICANDO CÓDIGO ACIMA
+
+# - O código acima cria a interface de usuário (UI) para um app Shiny em R. Aqui está uma explicação detalhada do que cada parte do código faz:
+  
+# -> navbarPage(): Esta função cria uma página de navegação na interface do aplicativo. Ela define a estrutura da interface com guias de navegação 
+#    no topo, permitindo que o usuário mude entre diferentes painéis ou páginas.
+
+# -> shinyjs::useShinyjs(): Isso carrega o pacote shinyjs, que fornece funcionalidades JavaScript adicionais para aplicativos Shiny.
+
+# -> bs_theme(): Define o tema de cores para o aplicativo usando a biblioteca Bootstrap. Ele define a paleta de cores, incluindo a cor principal, 
+#    secundária e de sucesso.
+
+# -> tags$style(): Define estilos CSS personalizados para elementos específicos na interface do usuário. Neste caso, está definindo um estilo para
+#    um elemento com o ID "nometestedesc".
+
+# -> title = "Dashboard com Shiny...": Define o título da página do dashboard.
+
+# -> tabPanel(): Cria uma guia na página de navegação. Neste caso, há uma guia chamada "Home" que contém todo o conteúdo do aplicativo.
+
+# -> sidebarLayout(): Define o layout da página com uma barra lateral e um painel principal. A barra lateral contém widgets de entrada, como
+#    seletores e botões, enquanto o painel principal exibirá os resultados e gráficos.
+
+# -> sidebarPanel(): Define o conteúdo da barra lateral. Ele inclui seletores de entrada, como selectInput() para escolher o tipo de teste
+#    estatístico, textInput() para inserir dados e botões de ação.
+
+# -> mainPanel(): Define o conteúdo do painel principal. Ele exibirá os resultados do teste estatístico e gráficos.
+
+# -> uiOutput(): Essa função é usada para criar elementos de interface de usuário dinâmicos. Eles serão gerados com base nas escolhas do usuário.
+
+# -> actionButton(): Cria um botão de ação que o usuário pode clicar para executar o teste estatístico.
+
+# -> fluidRow(): Cria uma linha de conteúdo flexível que se ajusta automaticamente ao tamanho da tela.
+
+# -> column(): Define as colunas dentro de uma linha. Isso ajuda a organizar o layout da página.
+
+# -> textOutput(), verbatimTextOutput(), DTOutput(), plotlyOutput(): Essas funções são usadas para criar espaços onde a saída dos resultados, 
+#    descrição e gráficos serão renderizados.
+
+# -> withSpinner(): Esta função envolve a saída em um spinner, mostrando uma animação de carregamento enquanto os resultados estão sendo 
+#    processados.
+
+# -> No geral, este código cria uma interface de usuário interativa onde o usuário pode escolher um teste estatístico, inserir dados e gerar
+#    resultados, incluindo um histograma e descrição do teste. A estrutura de guias de navegação permite ao usuário alternar entre diferentes
+#    partes do aplicativo.
 
 
 
-# Server (inteligência de negócio)
 
-# Cria a função server
+

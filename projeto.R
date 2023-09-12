@@ -10,7 +10,7 @@ getwd()
 
 # Instalando as bibliotecas
 
-install.packages(c("shiny", "shinyjs", "shinyvalidate", "shinycssloaders", "tidyverse", "broom", "bslib", "thematic", "DT", "plotly"))
+# install.packages(c("shiny", "shinyjs", "shinyvalidate", "shinycssloaders", "tidyverse", "broom", "bslib", "thematic", "DT", "plotly"))
 
 
 # Importando as bibliotecas
@@ -40,9 +40,11 @@ options(warn = -1)        # suprimir mensagens de aviso durante a execução do 
 # - Utilizaremos testes paramétricos e não paramétricos.
 
 
-# Carrega o arquivo com a descrição dos testes
+
+# Carrega o arquivo com a descrição dos testes (para incluir no Dashboard)
 dados_desc_te <- read.csv("desc_testes_estatisticos.csv")
-View(dados_desc_te)
+
+# View(dados_desc_te)
 
 
 
@@ -95,6 +97,122 @@ View(dados_desc_te)
 
 
 
+# - Por ser uma aplicação temos que executar com o "Run app" ao invés de executar linha a linha.
 
 
 
+
+#### UI - User Interface (configurando a interface de negócio)
+
+
+## Criando a página de navegação 
+
+ui <- navbarPage(
+  
+  # Cria instância do shinyjs
+  
+  shinyjs::useShinyjs(),
+  
+  # Tema de cores do dashboard
+  
+  theme = bs_theme(version = 5,
+                   bootswatch = "flatly",
+                   primary = "#3f7928",
+                   secondary = "#5340f7",
+                   success = "#dadeba"
+  ),
+  
+  # Estilo
+  
+  tags$style(type = 'text/css', '#nometestedesc {white-space: pre-wrap;}'),
+  
+  # Título do Dashboard
+  
+  title = "Dashboard com Shiny Para Automação de Testes Estatísticos",
+  
+  tabPanel(
+    title = "Home",
+    sidebarLayout(
+      
+      # Painel lateral
+  
+          sidebarPanel(
+            width = 4,
+        
+            # Input
+            selectInput(
+              inputId = "nometeste",
+              label = "Selecione o Teste Estatístico Desejado:",
+              choices = c("Teste t Para Uma Amostra", 
+                          "Teste t Para Duas Amostras", 
+                          "Teste de Wilcoxon Signed Rank", 
+                          "Teste de Shapiro-Wilk",
+                          "Teste Kolmogorov-Smirnov"
+              ),
+              selected = "Teste t Para Uma Amostra"
+            ),
+            textInput(
+              inputId = "primeira_amostra",
+              label = "Digite uma lista de valores numéricos (separados por vírgula) ou use o botão para gerar dados randômicos:"
+            ),
+            uiOutput("vector"),
+            h5(
+              actionButton(
+                inputId = "randomnum",
+                label = "Gerar Dados Randômicos"
+              ),
+              align = "center"
+            ),
+            uiOutput("samplemean"),
+            uiOutput("confidencelevel"),
+            h5(
+              actionButton(
+                inputId = "generate",
+                label = "Executar o Teste"
+              ),
+              align = "center"
+            )
+          
+          ), # sidebarPanel
+          
+          # Painel principal
+          
+          mainPanel(
+            fluidRow(
+              column(
+                width = 6, 
+                h4(textOutput("testresulttitle")), 
+                withSpinner(DTOutput("testresult"), type = 7), 
+                align = "center"
+              ),
+              column(
+                width = 6, 
+                h4(textOutput("histogramtitle")), 
+                withSpinner(plotlyOutput("hist", width = "100%"), type = 7), 
+                align = "center"
+              )
+            ),
+            fluidRow(br()),
+            fluidRow(h4(textOutput("descriptiontitle")), align = "center"),
+            fluidRow(
+              withSpinner(verbatimTextOutput("nometestedesc"), type = 7)
+            )
+            
+          ) # mainPanel
+  
+    ) # sidebarLayout
+  
+  ), # tabPanel
+
+  nav_item(a(href = "https://www.datascienceacademy.com.br", "Suporte"))
+  
+) # navbarPage
+
+
+
+
+
+
+# Server (inteligência de negócio)
+
+# Cria a função server

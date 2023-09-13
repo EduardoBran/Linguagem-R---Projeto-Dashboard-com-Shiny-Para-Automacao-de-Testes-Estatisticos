@@ -265,3 +265,111 @@ ui <- navbarPage(
 
 
 
+#### Server (inteligência de negócio)
+
+
+## Criando a função server
+
+server <- function(input, output, session) {
+  
+  # Tema do shiny
+  
+  thematic::thematic_shiny()
+  
+  # Gerando 20 números randômicos seguindo uma distribuição normal
+  
+  randomnumx <- eventReactive(input$randomnum, {randomnum <- rnorm(n = 20)})
+  
+  # Gerando 20 números randômicos seguindo uma distribuição normal
+  
+  randomnumy <- eventReactive(input$randomnum, {randomnum <- rnorm(n = 20)})
+  
+  
+  # Vetor dos testes de uma amostra
+  
+  output$vector <- renderUI({
+    onevector <- c('Teste t Para Uma Amostra', 'Teste de Wilcoxon Signed Rank', 'Teste de Shapiro-Wilk')
+    
+    # se o teste selecionado não estiver na lista anterior, mostra a caixa para segunda amostra
+    
+    if(!input$nometeste %in% onevector){
+      textInput(
+        inputId = "segunda_amostra",
+        label = "Digite a segunda lista de valores numéricos (separados por vírgula) ou use o botão para gerar dados randômicos:"
+      )
+    }
+    
+  }) # renderUI
+  
+  
+  # Vetor dos testes que requerem a média amostral
+  
+  output$samplemean <- renderUI({
+    onevector <- c('Teste t Para Uma Amostra', 'Teste de Wilcoxon Signed Rank', 'Teste t Para Duas Amostras')
+    
+    # se o teste selecionado estiver na lista anterior, mostra a caixa solicitando a média amostral
+    
+    if(!input$nometeste %in% samplemean){
+      numericInput(
+        inputId = "mu",
+        label = "Média da Amostra",
+        value = 0
+      )
+    }
+    
+  }) # renderUI
+  
+  
+  # Vetor dos testes que requerem intervalo de confiança
+  
+  output$confidencelevel <- renderUI({
+    confidencelevel <- c('Teste t Para Uma Amostra', 'Teste de Wilcoxon Signed Rank', "Teste t Para Duas Amostras")
+    
+    # se o teste selecionado estiver na lista anterior, mostra a caixa solicitando o intervalo de confiança
+    
+    if(input$nometeste %in% confidencelevel){
+      selectInput(
+        inputId = "conf.level",
+        label = "Selecione o Intervalo de Confiança:",
+        choices = list("90%" = 0.90, "95%" = 0.95, "99%" = 0.99),
+        selected = 0.90
+      )
+    }
+    
+  }) # renderUI
+  
+  
+  # Primeira amostra de  dados
+  observe({updateTextInput(session, "primeira_amostra", value = paste(randomnumx(), collapse = ", "))})
+  
+  # Segunda amostra de dados
+  observe({updateTextInput(session, "segunda_amostra", value = paste(randomnumy(), collapse = ", "))})
+  
+
+  
+  
+  
+  
+  
+} # server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

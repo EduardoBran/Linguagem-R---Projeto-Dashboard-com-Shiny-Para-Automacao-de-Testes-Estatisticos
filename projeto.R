@@ -495,12 +495,49 @@ shinyApp(ui = ui, server = server)
 
 
 
+## Explicando cada parte do código (server:
+
+# -> Função server: Esta é a função principal do seu aplicativo Shiny. Ela recebe três argumentos: input, output, e session, que são usados para
+#    interagir com os elementos da interface, exibir resultados e gerenciar a sessão do aplicativo.
+
+# -> Tema do Shiny: A primeira linha da função server aplica um tema personalizado usando a biblioteca thematic. Isso ajusta a aparência do seu 
+#    aplicativo Shiny.
+
+# -> Geração de Números Aleatórios: Duas funções eventReactive são definidas para gerar números aleatórios seguindo uma distribuição normal. Essas 
+#    funções são acionadas pelo evento input$randomnum, que está vinculado a um botão no painel lateral do aplicativo. Esses números aleatórios
+#    serão usados como suas amostras de dados.
+
+# -> Elementos da Interface do Usuário Dinâmicos: Existem três blocos de código (output$vector, output$samplemean, e output$confidencelevel) que
+#    renderizam elementos da interface do usuário dinamicamente com base na seleção do teste estatístico feita pelo usuário. Por exemplo, se o 
+#    usuário selecionar "Teste t Para Uma Amostra," um campo para a média da amostra e seleção de nível de confiança serão exibidos. Se outro 
+#    teste for selecionado, a entrada para a segunda amostra de dados será exibida.
+
+# -> Observadores e Validação: Há um observador que atualiza os campos de entrada para as amostras de dados (primeira_amostra e segunda_amostra) 
+#    com os números aleatórios gerados. Além disso, há um objeto InputValidator definido para validar esses campos de entrada. Ele verifica se os
+#    campos são obrigatórios e se os dados inseridos são numéricos e separados por vírgula.
+
+# -> Validação de Amostras: Um observador observe está configurado para habilitar ou desabilitar o botão "Executar o Teste" com base na seleção do
+#    teste e na validação das amostras. Se o teste exigir apenas uma amostra, o botão será habilitado quando a primeira amostra for válida. Se o
+#    teste exigir duas amostras, o botão só será habilitado quando ambas as amostras forem válidas.
+
+# -> Execução do Teste Estatístico: A função stat_test é uma função reativa que executa o teste estatístico selecionado com base nas opções
+#    escolhidas pelo usuário. Os resultados são calculados com base nas amostras de dados e nos parâmetros fornecidos (como média da amostra e
+#    intervalo de confiança). Os resultados são organizados em um formato adequado para exibição.
+
+# -> Renderização dos Resultados: Dois blocos de código (output$testresult e output$hist) são responsáveis por renderizar os resultados do teste
+#    estatístico em uma tabela interativa e em um gráfico de histograma. Os resultados são exibidos na interface do usuário após a execução do
+#    teste.
+
+# -> Exibição de Títulos e Descrições: Os títulos das seções (como "Resultado do Teste" e "Histograma") e as descrições do teste são exibidos na
+#    interface do usuário com base nas ações do usuário.
+
+# -> Seleção de Descrição do Teste: O último bloco de código (output$nometestedesc) exibe a descrição do teste selecionado pelo usuário. Ele 
+#    consulta o objeto dados_desc_te para encontrar a descrição correspondente com base no nome do teste selecionado.
 
 
-
-
-
-
+# - Em resumo, este aplicativo Shiny permite ao usuário realizar diferentes testes estatísticos em amostras de dados e exibir os resultados,
+#   incluindo tabelas e gráficos interativos. Ele também fornece descrições dos testes selecionados para ajudar o usuário a entender melhor os 
+#   resultados.
 
 
 
